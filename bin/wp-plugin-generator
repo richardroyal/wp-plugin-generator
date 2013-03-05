@@ -1,7 +1,10 @@
 #! /usr/bin/env python
 
-import sys, argparse
+import sys, argparse, yaml
+#from wp_plugin_generator import write_wp_plugin
 
+
+#write_wp_plugin.parse_arguments()
 
 
 # Grab command line arguments
@@ -10,4 +13,7 @@ parser.add_argument('infile', nargs='?', type=argparse.FileType('r'), default=sy
 args = parser.parse_args()
 
 
-print args.infile
+stream = open( args.infile.name )
+config = yaml.load(stream)
+
+config['setup']

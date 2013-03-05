@@ -1,0 +1,9 @@
+# config.yaml
+
+setup:
+      - full_name: Simple Widget
+      - short_description: A widget from completing simple tasks.
+      - long_description: A longer description....
+
+advanced:
+      - unique_prefix: wp_sw

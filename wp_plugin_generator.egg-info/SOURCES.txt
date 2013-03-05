@@ -1,0 +1,8 @@
+setup.py
+wp_plugin_generator/__init__.py
+wp_plugin_generator/write_wp_plugin.py
+wp_plugin_generator.egg-info/PKG-INFO
+wp_plugin_generator.egg-info/SOURCES.txt
+wp_plugin_generator.egg-info/dependency_links.txt
+wp_plugin_generator.egg-info/requires.txt
+wp_plugin_generator.egg-info/top_level.txt

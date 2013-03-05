@@ -1,0 +1,11 @@
+Metadata-Version: 1.1
+Name: wp-plugin-generator
+Version: 0.1
+Summary: Script that uses a config file to generate a WordPress plugin scaffold.
+Home-page: https://github.com/richardroyal/wp-plugin-generator
+Author: Richard Royal
+Author-email: @richardroyal
+License: UNKNOWN
+Download-URL: https://github.com/richardroyal/wp-plugin-generator
+Description: UNKNOWN
+Platform: UNKNOWN
