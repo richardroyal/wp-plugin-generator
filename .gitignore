@@ -1,3 +1,6 @@
 .pyc
 .egg-info
 .egg
+wp_plugin_generator.egg-info/
+dist/
+build/
