@@ -1,4 +1,38 @@
+"""
+Functions needed for outputting scaffold config file using:
+wp-plugin-generator -c
+wp-plugin-generator --configure
+Outputs to config.yml
+"""
 
+import os, sys, yaml, datetime
+
+
+
+def write_config_yaml():
+  """
+  Write config.yml if it does not exist.
+  """
+  if not os.path.exists( "config.yml" ):
+    f = open("config.yml", 'w')
+    f.write(scaffold_config())
+    f.close
+    
+  else:
+    print "Config file already exists. Exiting."
+    sys.exit()
+
+
+
+
+
+
+
+
+
+
+def scaffold_config():
+  s = """
 # config.yaml
 
 plugin:
@@ -35,4 +69,5 @@ plugin:
 configuration:
   folder_name: simple_widget
   unique_prefix: wp_sw
-  
+  """
+  return s

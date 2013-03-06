@@ -2,7 +2,7 @@
 Import data from config file and generate WordPress plugin bootstrap.
 """
 
-import os, sys, argparse, yaml, datetime
+import os, sys, argparse, yaml, datetime, write_config_file
 
 
 def parse_and_run_command():
@@ -32,14 +32,22 @@ def parse_arguments():
   Loads and checks arguments from STDIN.
   """
   parser = argparse.ArgumentParser(description='Script that uses a config file to generate a WordPress plugin scaffold.')
-  parser.add_argument('infile', nargs='?', type=argparse.FileType('r'), default=sys.stdin, help='an integer for the accumulator')
+  parser.add_argument('-c', '--configure', help='Generate scaffold config.yml to define plugin configuration.', action="store_true")
+  parser.add_argument('infile', nargs='?', type=argparse.FileType('r'), default=sys.stdin, help='Input configuration file for generating plugin scaffold.')
   args = parser.parse_args()
 
-  stream = open( args.infile.name )
-  cf = yaml.load(stream)
-  stream.close()
+  
+  if args.configure:
+    print "Generating config file."
+    write_config_file.write_config_yaml()
+    sys.exit()
+  else:
+    print "Generating plugin scaffold."
+    stream = open( args.infile.name )
+    cf = yaml.load(stream)
+    stream.close()
 
-  return cf
+    return cf
 
 
 def create_skeleton( config ):
