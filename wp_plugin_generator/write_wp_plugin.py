@@ -2,7 +2,7 @@
 Import data from config file and generate WordPress plugin bootstrap.
 """
 
-import os, sys, argparse, yaml
+import os, sys, argparse, yaml, datetime
 
 
 def parse_and_run_command():
@@ -17,9 +17,12 @@ def parse_and_run_command():
   print config
   print "\n\n"
   create_readme( config )
+  create_manifest( config )
+  add_plugin_manifest_template( config )
 
-  #write_wp_plugin.create_wordpress_readme()
-  #write_wp_plugin.create_skeleton()
+
+
+
 
 
 
@@ -103,3 +106,51 @@ def create_readme( config ):
 
   f.close()
   
+
+
+def create_manifest( config ):
+  """
+  Create plugin manifest file will proper WordPress headings.
+  """
+  cf = config['configuration']
+  pl = config['plugin']
+  f = open(cf['folder_name'] + "/" + cf['folder_name'] + ".php", 'w') 
+  f.write("<?php\n/*\n")
+  f.write("Plugin Name: " + pl['name'] + "\n")
+  f.write("Plugin URI: " + pl['uri'] + "\n")
+  f.write("Description: " + pl['short_description'] + "\n")
+  f.write("Version: " + str(pl['version']) + "\n")
+  f.write("Author: " + pl['authors'] + "\n")
+  f.write("Author URI: " + pl['name'] + "\n")
+  f.write("License: " + pl['name'] + "\n")
+  f.write("*/\n?>\n\n")
+  write_disclaimer(f, config)
+  f.close();
+
+
+def write_disclaimer(f, config):
+  cf = config['configuration']
+  pl = config['plugin']
+  now = datetime.datetime.now()
+  y = str(now.year)
+  f.write("<?php\n")
+  f.write("/*\n")
+  f.write("    Copyright " + y + " " + pl['authors'] + " (" + pl['author_emails'] + ")\n")
+  f.write("    This program is distributed in the hope that it will be useful,\n")
+  f.write("    but WITHOUT ANY WARRANTY; without even the implied warranty of\n")
+  f.write("    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n")
+  f.write("*/\n")
+  f.write("?>\n\n\n")
+
+
+def add_plugin_manifest_template( config )
+  """
+  Write plugin tamplate with standard functions used by most WordPress plugins plugins.
+  """
+  cf = config['configuration']
+  pl = config['plugin']
+  f = open(cf['folder_name'] + "/" + cf['folder_name'] + ".php", 'w') 
+  f.write("<?php\n")
+
+  f.write("?>")
+  f.close()
