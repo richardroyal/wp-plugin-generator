@@ -4,3 +4,4 @@
 wp_plugin_generator.egg-info/
 dist/
 build/
+simple_widget/
