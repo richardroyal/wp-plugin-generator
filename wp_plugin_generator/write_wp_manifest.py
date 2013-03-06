@@ -48,19 +48,64 @@ def add_plugin_manifest_template(f, config):
   pl = config['plugin']
   f.write("<?php\n")
   f.write("defined('WP_PLUGIN_URL') or die('Restricted access');\n\n")
-  f.write("$wpdb;\n\n")
-  f.write("define('" + cf['unique_constant_prefix'] + "PATH', ABSPATH.PLUGINDIR.'/"+ cf['folder_name']+"/');\n")
-  f.write("define('" + cf['unique_constant_prefix'] + "URL', WP_PLUGIN_URL.'/"+ cf['folder_name']+"/');\n")
-
-
-
-
-  f.write
+  f.write("global $wpdb;\n")
+  
+  ucp = cf['unique_constant_prefix']
+  f.write("define('" + ucp + "PATH', ABSPATH.PLUGINDIR.'/"+ cf['folder_name']+"/');\n")
+  f.write("define('" + ucp + "URL', WP_PLUGIN_URL.'/"+ cf['folder_name']+"/');\n")
+  f.write("define('" + ucp + "ROUTE', get_bloginfo('url').'/?"+ cf['unique_function_prefix']+"routing=');\n")
+  f.write("require_once(ABSPATH.'wp-admin/includes/upgrade.php');\n")
+  f.write('require_once("lib/db_setup.php");\n')
+  f.write('require_once("lib/functions.php");\n')
+  f.write('require_once("admin/functions.php");\n')
+  include_widgets(f, config['widgets'])
+  f.write("\n\n\n\n")
+  f.write( css_include(config) )
+  f.write( js_include(config) )
 
 
   f.write("?>")
   f.close()
 
 
+def include_widgets(f, widgets):
+  for w in widgets:
+    f.write('require_once("lib/class.' + w['unique_class_name'] + '.php");\n')
+    f.write('require_once("views/view.' + w['unique_class_name'] + '.php");\n')
+  
+
+
+
+def css_include(config):
+  cf = config['configuration']
+  pl = config['plugin']
+  fn = cf["folder_name"]
+  ufp = cf['unique_function_prefix']
+  ucp = cf['unique_constant_prefix']
+  s  = "/**\n *  Register and enqueue frontend CSS\n */\n"
+  s += "function " + ufp + "stylesheets() {\n"
+  s += "  if(!is_admin()){\n"
+  s += "    wp_enqueue_style('" + fn + "-style', " + ucp + "URL.'assets/css/" + fn + ".css');\n"
+  s += "  }\n"
+  s += "}add_action('wp_print_styles', '" + ufp + "stylesheets');\n\n\n"
+  
+  return s
+
+
+def js_include(config):
+  cf = config['configuration']
+  pl = config['plugin']
+  fn = cf["folder_name"]
+  ufp = cf['unique_function_prefix']
+  ucp = cf['unique_constant_prefix']
+  s  = "/**\n *  Register and enqueue frontend JavaScript\n */\n"
+  s += "function " + ufp + "js() {\n"
+  s += "  if(!is_admin()){\n"
+  s += "    wp_enqueue_script('jquery');\n"
+  s += "    wp_enqueue_script('" + fn + "-js', " + ucp + "URL.'assets/js/" + fn + ".js');\n"
+  s += "  }\n"
+  s += "}add_action('wp_enqueue_scripts', '" + ufp + "js');\n\n\n"
+  
+  return s
 
 

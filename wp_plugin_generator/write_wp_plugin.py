@@ -2,7 +2,7 @@
 Import data from config file and generate WordPress plugin bootstrap.
 """
 
-import os, sys, argparse, yaml, write_wp_readme, write_config_file, write_wp_manifest
+import os, sys, argparse, yaml, write_wp_readme, write_config_file, write_wp_manifest, write_wp_widgets
 
 
 def parse_and_run_command():
@@ -18,6 +18,7 @@ def parse_and_run_command():
   print "\n\n"
   write_wp_readme.create_readme( config )
   write_wp_manifest.create_manifest( config )
+  write_wp_widgets.create_widgets( config )
 
 
 
@@ -67,6 +68,19 @@ def create_skeleton( config ):
     os.makedirs( cf['folder_name'] + '/assets/css' )
     os.makedirs( cf['folder_name'] + '/assets/js' )
     os.makedirs( cf['folder_name'] + '/assets/images' )
+    f = open( cf['folder_name'] + '/lib/functions.php', 'w')
+    f = open( cf['folder_name'] + '/admin/functions.php', 'w')
+    f = open( cf['folder_name'] + '/lib/db_setup.php', 'w')
+    f = open( cf['folder_name'] + '/assets/css/' + cf['folder_name'] + '.css', 'w')
+    f = open( cf['folder_name'] + '/assets/js/' + cf['folder_name'] + '.js', 'w')
+    f = open( cf['folder_name'] + '/admin/index.html', 'w')
+    f = open( cf['folder_name'] + '/views/index.html', 'w')
+    f = open( cf['folder_name'] + '/views/partials/index.html', 'w')
+    f = open( cf['folder_name'] + '/lib/index.html', 'w')
+    f = open( cf['folder_name'] + '/assets/index.html', 'w')
+    f = open( cf['folder_name'] + '/assets/css/index.html', 'w')
+    f = open( cf['folder_name'] + '/assets/js/index.html', 'w')
+    f = open( cf['folder_name'] + '/assets/images/index.html', 'w')
 
   else:
     print "Plugin folder already exists. Exiting."

@@ -76,6 +76,7 @@ configuration:
 widgets:
  - name: Simple Widget
    unique_class_name: SimpleWidget
+   description: A widget that allows simple actions.
    
 
 
