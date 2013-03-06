@@ -98,6 +98,13 @@ class {1} extends WP_Widget{{
 
 
 }}
+
+
+/* Register Widget */
+add_action( 'widgets_init', function(){{
+  return register_widget( '{1}' );
+}});
+
 ?>
   """.format(w['name'], w['unique_class_name'], w['description'])
 
