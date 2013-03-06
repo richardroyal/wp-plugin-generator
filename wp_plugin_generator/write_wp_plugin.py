@@ -143,14 +143,16 @@ def write_disclaimer(f, config):
   f.write("?>\n\n\n")
 
 
-def add_plugin_manifest_template( config )
+def add_plugin_manifest_template( config ):
   """
   Write plugin tamplate with standard functions used by most WordPress plugins plugins.
   """
   cf = config['configuration']
   pl = config['plugin']
-  f = open(cf['folder_name'] + "/" + cf['folder_name'] + ".php", 'w') 
+  f = open(cf['folder_name'] + "/" + cf['folder_name'] + ".php", 'a') 
   f.write("<?php\n")
+  f.write("defined('WP_PLUGIN_URL') or die('Restricted access');\n\n")
+  f.write("$wpdb;\n")
 
   f.write("?>")
   f.close()
