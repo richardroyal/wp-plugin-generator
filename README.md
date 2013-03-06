@@ -10,7 +10,7 @@ Start by copying and filling out the configuration template.
 
 ```bash
 
-# config.yaml
+# config.yml
 
 plugin:
   name: Simple Widget
