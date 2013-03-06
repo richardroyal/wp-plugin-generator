@@ -43,7 +43,7 @@ plugin:
   author_emails: you@example.com
   author_uri: http://example.com
   tags: comments, spam
-  version: 3.0.1
+  version: 0.0.1
   requires_at_least: 3.0.1
   tested_up_to: 3.4
   stable_tag: 4.3
@@ -68,6 +68,16 @@ plugin:
 
 configuration:
   folder_name: simple_widget
-  unique_prefix: wp_sw
+  unique_function_prefix: wpsw_
+  unique_constant_prefix: WPSW_
+
+
+
+widgets:
+ - name: Simple Widget
+   unique_class_name: SimpleWidget
+   
+
+
   """
   return s

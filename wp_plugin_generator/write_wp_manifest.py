@@ -19,7 +19,7 @@ def create_manifest( config ):
   f.write("Author: " + pl['authors'] + "\n")
   f.write("Author URI: " + pl['name'] + "\n")
   f.write("License: " + pl['name'] + "\n")
-  f.write("*/\n?>\n\n")
+  f.write("*/\n?>\n")
   write_disclaimer(f, config)
   add_plugin_manifest_template(f, config )
   f.close();
@@ -37,7 +37,7 @@ def write_disclaimer(f, config):
   f.write("    but WITHOUT ANY WARRANTY; without even the implied warranty of\n")
   f.write("    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n")
   f.write("*/\n")
-  f.write("?>\n\n\n")
+  f.write("?>\n")
 
 
 def add_plugin_manifest_template(f, config):
@@ -48,7 +48,19 @@ def add_plugin_manifest_template(f, config):
   pl = config['plugin']
   f.write("<?php\n")
   f.write("defined('WP_PLUGIN_URL') or die('Restricted access');\n\n")
-  f.write("$wpdb;\n")
+  f.write("$wpdb;\n\n")
+  f.write("define('" + cf['unique_constant_prefix'] + "PATH', ABSPATH.PLUGINDIR.'/"+ cf['folder_name']+"/');\n")
+  f.write("define('" + cf['unique_constant_prefix'] + "URL', WP_PLUGIN_URL.'/"+ cf['folder_name']+"/');\n")
+
+
+
+
+  f.write
+
 
   f.write("?>")
   f.close()
+
+
+
+
