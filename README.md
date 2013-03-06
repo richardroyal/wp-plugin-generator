@@ -6,7 +6,14 @@ Script that uses a config file to generate a WordPress plugin scaffold.
 
 ## Basic Usage
 
-Start by copying and filling out the configuration template.
+Start by generating and filling out the configuration template.
+
+```bash
+# Creates config.yml
+wp-plugin-generator -c
+```
+
+Fill out the template config.yml file which looks like this:
 
 ```bash
 
