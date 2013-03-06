@@ -12,14 +12,24 @@ Start by copying and filling out the configuration template.
 
 # config.yaml
 
-setup:
-      - full_name: Simple Widget
-      - short_description: A widget from completing simple tasks.
-      - long_description: A longer description....
+plugin:
+  name: Simple Widget
+  donate_link: http://example.com
+  tags: comments, spam
+  requires_at_least: 3.0.1
+  tested_up_to: 3.4
+  stable_tag: 4.3
+  license: GPLv2
+  license_url: http://www.gnu.org/licenses/gpl-2.0.html
+  short_description: A widget from completing simple tasks.
+  .
+  .
 
-advanced:
-      - unique_prefix: wp_sw
-
+configuration:
+  folder_name: simple_widget
+  unique_prefix: wp_sw
+  .
+  .
 ```
 
 Then run the generator on the config file. This will output a plugin template with general and advanced features implemented using the proper WordPress API, including a WordPress plugins directory compatable readme.txt. Comment out or modify what is not needed.
