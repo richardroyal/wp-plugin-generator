@@ -15,7 +15,7 @@ wp-plugin-generator -c
 
 Fill out the template config.yml file which looks like this:
 
-```bash
+```yaml
 
 # config.yml
 
