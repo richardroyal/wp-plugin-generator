@@ -15,10 +15,8 @@ wp-plugin-generator -c
 
 Fill out the template config.yml file which looks like this:
 
-```yaml
-
+```yml
 # config.yml
-
 plugin:
   name: Simple Widget
   tags: comments, spam
@@ -37,6 +35,6 @@ configuration:
 Then run the generator on the config file. This will output a plugin template with general and advanced features implemented using the proper WordPress API, including a WordPress plugins directory compatable readme.txt. Comment out or modify what is not needed.
 
 ```bash
-wp-plugin-generator config.yaml
+wp-plugin-generator config.yml
 ```
 
