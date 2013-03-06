@@ -11,6 +11,9 @@ def create_widgets( config ):
     fn = config['configuration']['folder_name'] + "/lib/class." + w['unique_class_name'] + ".php"
     f = open(fn, "w")
     f.write( write_widget(config, w) )
+    write_widget_view(config, w)
+
+    f.close()
 
 
 
@@ -49,7 +52,7 @@ class {1} extends WP_Widget{{
     $title = apply_filters( 'widget_title', $instance['title'] );
 
     echo $before_widget;
-    if ( ! empty( $title ) ) {{
+    if( !empty($title) ) {{
       echo $before_title . $title . $after_title;
     }}
     echo __( 'Hello, World!', 'text_domain' );
@@ -109,4 +112,23 @@ add_action( 'widgets_init', function(){{
   """.format(w['name'], w['unique_class_name'], w['description'])
 
   return s
+ 
+
+
+
+
+def write_widget_view(config, w):
+  """
+  Write a file that holds the frontend view on the widget.
+  """
+  fn = config['configuration']['folder_name'] + "/views/view." + w['unique_class_name'] + ".php"
+  f = open(fn, "w")
   
+  s = """\
+  """
+
+  f.write(s)
+  f.close()
+
+
+
