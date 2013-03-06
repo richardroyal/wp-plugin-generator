@@ -21,13 +21,8 @@ Fill out the template config.yml file which looks like this:
 
 plugin:
   name: Simple Widget
-  donate_link: http://example.com
   tags: comments, spam
-  requires_at_least: 3.0.1
-  tested_up_to: 3.4
-  stable_tag: 4.3
   license: GPLv2
-  license_url: http://www.gnu.org/licenses/gpl-2.0.html
   short_description: A widget from completing simple tasks.
   .
   .
