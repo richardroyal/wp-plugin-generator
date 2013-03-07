@@ -3,8 +3,6 @@ Create WordPress widget scaffolds as requested.
 """
 
 
-
-
 def create_widgets( config ):
 
   for w in config['widgets']:
@@ -14,8 +12,6 @@ def create_widgets( config ):
     write_widget_view(config, w)
 
     f.close()
-
-
 
 
 
@@ -31,7 +27,7 @@ def write_widget(config, w):
  */
 class {1} extends WP_Widget{{
 
-  public function __construct( ) {{
+  public function __construct() {{
     parent::__construct(
               'ermm_widget', '{0}',
                array( 'description' => "{2}" )
@@ -55,7 +51,7 @@ class {1} extends WP_Widget{{
     if( !empty($title) ) {{
       echo $before_title . $title . $after_title;
     }}
-    echo __( 'Hello, World!', 'text_domain' );
+    echo {1}_view( $this );
     echo $after_widget;
   }}
 
@@ -108,8 +104,7 @@ add_action( 'widgets_init', function(){{
   return register_widget( '{1}' );
 }});
 
-?>
-  """.format(w['name'], w['unique_class_name'], w['description'])
+?>\n""".format(w['name'], w['unique_class_name'], w['description'])
 
   return s
  
@@ -125,10 +120,16 @@ def write_widget_view(config, w):
   f = open(fn, "w")
   
   s = """\
-  """
+<?php
+/**
+ *  View for {0} Widget.
+ */
+function {1}_view($widget){{
+  return "WIDGET VIEW {1}";
+}}
+
+?>\n""".format(w['name'], w['unique_class_name'], w['description'])
 
   f.write(s)
   f.close()
-
-
 
