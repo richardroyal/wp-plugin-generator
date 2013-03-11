@@ -36,3 +36,19 @@ configuration:
   folder_name: simple_widget
   unique_prefix: wp_sw
   
+
+widgets:
+ - name: Simple Widget
+   unique_class_name: SimpleWidget
+   description: A widget that allows simple actions.
+   # Attributes - title is assumed
+   attributes:
+     - name: image
+       type: image
+
+     - name: content
+       type: textarea
+
+     - name: link
+       type: url
+

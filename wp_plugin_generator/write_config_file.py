@@ -77,11 +77,16 @@ widgets:
  - name: Simple Widget
    unique_class_name: SimpleWidget
    description: A widget that allows simple actions.
-   # Attributes
-   - name
-   - description
-   
+   # Attributes - title is assumed
+   attributes:
+     - name: image
+       type: image
 
+     - name: content
+       type: textarea
+
+     - name: link
+       type: url
 
   """
   return s

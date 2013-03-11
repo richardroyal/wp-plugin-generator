@@ -1,7 +1,7 @@
 """
 Create plugin manifest file will proper WordPress headings.
 """
-import datetime
+import os, datetime
 
 
 def create_manifest( config ):
@@ -69,9 +69,11 @@ def add_plugin_manifest_template(f, config):
 
 
 def include_widgets(f, widgets):
+
   for w in widgets:
     f.write('require_once("lib/class.' + w['unique_class_name'] + '.php");\n')
     f.write('require_once("views/view.' + w['unique_class_name'] + '.php");\n')
+    f.write('require_once("admin/' + w['unique_class_name'] + '/form.' + w['unique_class_name'] + '.php");\n')
   
 
 

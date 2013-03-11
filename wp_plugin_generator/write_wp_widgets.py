@@ -2,14 +2,17 @@
 Create WordPress widget scaffolds as requested.
 """
 
+import os
+
 
 def create_widgets( config ):
 
   for w in config['widgets']:
     fn = config['configuration']['folder_name'] + "/lib/class." + w['unique_class_name'] + ".php"
     f = open(fn, "w")
-    f.write( write_widget(config, w) )
-    write_widget_view(config, w)
+    f.write( write_widget( config, w ) )
+    write_widget_view( config, w )
+    write_admin_widget_form( config, w )
 
     f.close()
 
@@ -19,6 +22,11 @@ def write_widget(config, w):
   """
   Write a single widget using stardard template
   """
+
+  #for attr in w['attributes']:
+#    attributes_array_str += 
+
+
   s = """\
 <?php
 /** 
@@ -32,6 +40,9 @@ class {1} extends WP_Widget{{
               'ermm_widget', '{0}',
                array( 'description' => "{2}" )
     );
+
+    $this->set_attributes();
+
   }}
 
 
@@ -82,19 +93,20 @@ class {1} extends WP_Widget{{
    * @param array $instance Previously saved values from database.
    */
   public function form( $instance ) {{
-    if ( isset( $instance[ 'title' ] ) ) {{
-      $title = $instance[ 'title' ];
-    }} else {{
-      $title = __( 'New title', 'text_domain' );
-    }}
 
-    echo {1}_admin_form( $this );
-    ?>
-    <p>
-    <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:' ); ?></label> 
-    <input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" />
-    </p>
-    <?php 
+    echo {1}_admin_form( $instance, $this );
+    
+  }}
+
+
+ /**
+  *  Set class attributes into $this->attributes
+  *
+  *  Set:
+  *    array( 'name' => $name, 'type' => $type )
+  */
+  function set_attributes(){{
+
     
   }}
 
@@ -135,4 +147,59 @@ function {1}_view($widget){{
 
   f.write(s)
   f.close()
+
+
+
+
+def write_admin_widget_form( config, w ):
+  """
+  Write a file that holds the admin form for the widget on the widget appearance screen.
+  """
+  fn = config['configuration']['folder_name'] + "/admin/" + w['unique_class_name']
+  os.makedirs( fn )
+  fn += "/form." + w['unique_class_name'] + ".php"
+  f = open(fn, "w")
+  attributes = w['attributes']
+#  attr_list = w
+  
+  s = """\
+<?php
+/**
+ *  View for {0} Widget Admin on appearance screen.
+ */
+function {1}_admin_form( $instance, $widget ){{
+
+  if ( isset( $instance[ 'title' ] ) ) {{
+    $title = $instance[ 'title' ];
+  }} else {{
+    $title = __( 'New title', 'text_domain' );
+  }}
+
+#  $s = '';
+#  foreach( $this->attributes as $attr ){
+#    $s .= {1}_admin_attr_field( $instance, $widget );
+#  }
+
+  $s  = '<p>';
+  $s .= '<label for="'.$widget->get_field_id( 'title' ).'">Title</label>';
+  $s .= '<input class="widefat" id="'.$widget->get_field_id( 'title' ).'" name="'.$widget->get_field_name( 'title' ).'" type="text" value="'.esc_attr( $title ).'" />';
+  $s .= '</p>';
+
+  return $s;
+}}
+
+
+/**
+ *  Function for outputting attribute fields on widget form.
+ */
+function {1}_admin_attr_field( $instance, $widget ){{
+
+}}
+
+
+?>\n""".format(w['name'], w['unique_class_name'], w['description'])
+
+  f.write(s)
+  f.close()
+
 
