@@ -145,7 +145,7 @@ function {1}_view($widget){{
   return "WIDGET VIEW {1}";
 }}
 
-?>\n""".format(w['name'], w['unique_class_name'], w['description'])
+?>\n""".format(w['name'], w['unique_class_name'], w['description'], w['unique_prefix'])
 
   f.write(s)
   f.close()

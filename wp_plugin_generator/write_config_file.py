@@ -76,6 +76,7 @@ configuration:
 widgets:
  - name: Simple Widget
    unique_class_name: SimpleWidget
+   unique_prefix: sww_
    description: A widget that allows simple actions.
    # Attributes - title is assumed
    attributes:
