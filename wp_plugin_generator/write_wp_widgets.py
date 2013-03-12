@@ -162,7 +162,6 @@ def write_admin_widget_form( config, w ):
   fn += "/form." + w['unique_class_name'] + ".php"
   f = open(fn, "w")
   attributes = w['attributes']
-#  attr_list = w
   
   s = """\
 <?php

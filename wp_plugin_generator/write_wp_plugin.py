@@ -13,9 +13,9 @@ def parse_and_run_command():
 
   config = parse_arguments()
   create_skeleton( config )
-  print "\n\n"
-  print config
-  print "\n\n"
+  #print "\n\n"
+  #print config
+  #print "\n\n"
   write_wp_readme.create_readme( config )
   write_wp_manifest.create_manifest( config )
   write_wp_widgets.create_widgets( config )
