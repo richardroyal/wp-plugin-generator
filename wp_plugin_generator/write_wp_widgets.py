@@ -23,8 +23,6 @@ def write_widget(config, w):
   Write a single widget using stardard template
   """
 
-  #for attr in w['attributes']:
-#    attributes_array_str += 
 
 
   s = """\
@@ -79,7 +77,10 @@ class {1} extends WP_Widget{{
    */
   public function update( $new_instance, $old_instance ) {{
     $instance = array();
-    $instance['title'] = strip_tags( $new_instance['title'] );
+
+    foreach( $this->attributes as $attr ){{
+      $instance[ $attr['name'] ] = strip_tags( $new_instance[ $attr['name'] ] );
+    }}
 
     return $instance;
   }}
@@ -106,8 +107,9 @@ class {1} extends WP_Widget{{
   *    array( 'name' => $name, 'type' => $type )
   */
   function set_attributes(){{
-
-    
+    $attributes = array();
+    {3}
+    $this->attributes = $attributes;
   }}
 
 
@@ -119,7 +121,7 @@ add_action( 'widgets_init', function(){{
   return register_widget( '{1}' );
 }});
 
-?>\n""".format(w['name'], w['unique_class_name'], w['description'])
+?>\n""".format(w['name'], w['unique_class_name'], w['description'], attribute_string(w))
 
   return s
  
@@ -169,21 +171,11 @@ def write_admin_widget_form( config, w ):
  */
 function {1}_admin_form( $instance, $widget ){{
 
-  if ( isset( $instance[ 'title' ] ) ) {{
-    $title = $instance[ 'title' ];
-  }} else {{
-    $title = __( 'New title', 'text_domain' );
+
+  $s = '';
+  foreach( $widget->attributes as $attr ){{
+    $s .= {1}_admin_attr_field( $instance, $widget, $attr );
   }}
-
-#  $s = '';
-#  foreach( $this->attributes as $attr ){
-#    $s .= {1}_admin_attr_field( $instance, $widget );
-#  }
-
-  $s  = '<p>';
-  $s .= '<label for="'.$widget->get_field_id( 'title' ).'">Title</label>';
-  $s .= '<input class="widefat" id="'.$widget->get_field_id( 'title' ).'" name="'.$widget->get_field_name( 'title' ).'" type="text" value="'.esc_attr( $title ).'" />';
-  $s .= '</p>';
 
   return $s;
 }}
@@ -192,8 +184,20 @@ function {1}_admin_form( $instance, $widget ){{
 /**
  *  Function for outputting attribute fields on widget form.
  */
-function {1}_admin_attr_field( $instance, $widget ){{
+function {1}_admin_attr_field( $instance, $widget, $attr ){{
 
+  if ( isset( $instance[ $attr['name'] ] ) ) {{
+    $value = esc_attr( $instance[ $attr['name'] ] );
+  }} else {{
+    $value = "";
+  }}
+
+  $s  = '<p>';
+  $s .= '<label for="'.$widget->get_field_id( $attr['name'] ).'">'.ucwords(str_replace( '_', ' ', $attr['name'] )).'</label>';
+  $s .= '<input class="widefat" id="'.$widget->get_field_id( $attr['name'] ).'" name="'.$widget->get_field_name( $attr['name'] ).'" type="text" value="'.$value.'" />';
+
+  $s .= '</p>';
+  return $s;
 }}
 
 
@@ -201,5 +205,18 @@ function {1}_admin_attr_field( $instance, $widget ){{
 
   f.write(s)
   f.close()
+
+
+
+
+def attribute_string(w):
+  """
+  Write model attributes from YAML in set_attributes function
+  """
+  s = ''
+  for a in w['attributes']:
+    s += "$attributes[] = array('name' => '" + a['name'] + "', 'type' => '" + w['name'] + "');\n    " 
+
+  return s
 
 
