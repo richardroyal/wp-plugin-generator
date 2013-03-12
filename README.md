@@ -1,7 +1,7 @@
 WordPress Plugin Generator
 ===================
 
-Script that uses a config file to generate a WordPress plugin scaffold.
+Script that uses a config file to generate a functioning WordPress plugin scaffolds, with widgets and attributes.
 
 
 ## Basic Usage
