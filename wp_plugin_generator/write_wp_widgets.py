@@ -186,17 +186,30 @@ function {1}_admin_form( $instance, $widget ){{
  */
 function {1}_admin_attr_field( $instance, $widget, $attr ){{
 
+  $label = ucwords( str_replace( '_', ' ', $attr['name'] ) );
+
   if ( isset( $instance[ $attr['name'] ] ) ) {{
     $value = esc_attr( $instance[ $attr['name'] ] );
   }} else {{
     $value = "";
   }}
 
-  $s  = '<p>';
-  $s .= '<label for="'.$widget->get_field_id( $attr['name'] ).'">'.ucwords(str_replace( '_', ' ', $attr['name'] )).'</label>';
-  $s .= '<input class="widefat" id="'.$widget->get_field_id( $attr['name'] ).'" name="'.$widget->get_field_name( $attr['name'] ).'" type="text" value="'.$value.'" />';
+  if( $attr['type'] == "textarea" ){{
 
-  $s .= '</p>';
+    $s  = '<label for="'.$widget->get_field_id( $attr['name'] ).'">'.$label.'</label>';
+    $s .= '<textarea class="widefat" id="'.$widget->get_field_id( $attr['name'] ).'" name="'.$widget->get_field_name( $attr['name'] ).'" rows="16" cols="20">';
+    $s .=   $value;
+    $s .= '</textarea>';
+
+  }} else {{
+
+    $s  = '<p>';
+    $s .= '<label for="'.$widget->get_field_id( $attr['name'] ).'">'.$label.'</label>';
+    $s .= '<input class="widefat" id="'.$widget->get_field_id( $attr['name'] ).'" name="'.$widget->get_field_name( $attr['name'] ).'" type="'.$attr['type'].'" value="'.$value.'" />';
+    $s .= '</p>';
+
+  }}
+
   return $s;
 }}
 
@@ -215,7 +228,7 @@ def attribute_string(w):
   """
   s = ''
   for a in w['attributes']:
-    s += "$attributes[] = array('name' => '" + a['name'] + "', 'type' => '" + w['name'] + "');\n    " 
+    s += "$attributes[] = array('name' => '" + a['name'] + "', 'type' => '" + a['type'] + "');\n    " 
 
   return s
 
