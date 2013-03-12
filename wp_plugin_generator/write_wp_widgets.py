@@ -186,7 +186,7 @@ function {1}_admin_form( $instance, $widget ){{
  */
 function {1}_admin_attr_field( $instance, $widget, $attr ){{
 
-  $label = ucwords( str_replace( '_', ' ', $attr['name'] ) );
+  $label = $attr['label'];
 
   if ( isset( $instance[ $attr['name'] ] ) ) {{
     $value = esc_attr( $instance[ $attr['name'] ] );
@@ -228,7 +228,7 @@ def attribute_string(w):
   """
   s = ''
   for a in w['attributes']:
-    s += "$attributes[] = array('name' => '" + a['name'] + "', 'type' => '" + a['type'] + "');\n    " 
+    s += "$attributes[] = array('name' => '" + a['name'] + "', 'type' => '" + a['type'] + "', 'label' => '" + a['label'] + "' );\n    " 
 
   return s
 

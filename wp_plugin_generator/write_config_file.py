@@ -79,13 +79,16 @@ widgets:
    description: A widget that allows simple actions.
    # Attributes - title is assumed
    attributes:
-     - name: image
+     - label: Simple Image
+       name: image
        type: image
 
-     - name: content
+     - label: Displayed Content
+       name: content
        type: textarea
 
-     - name: link
+     - label: URL
+       name: link
        type: url
 
   """
