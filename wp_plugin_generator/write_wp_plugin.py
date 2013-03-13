@@ -27,7 +27,6 @@ def parse_and_run_command():
 
 
 
-
 def parse_arguments():
   """
   Loads and checks arguments from STDIN.
@@ -39,14 +38,15 @@ def parse_arguments():
 
   
   if args.configure:
-    print "Generating config file."
+    print "Generating config file:  config.yml"
     write_config_file.write_config_yaml()
     sys.exit()
   else:
-    print "Generating plugin scaffold."
+    print "Generating plugin scaffold: "
     stream = open( args.infile.name )
     cf = yaml.load(stream)
     stream.close()
+    print cf['configuration']['folder_name'] + "/"
 
     return cf
 

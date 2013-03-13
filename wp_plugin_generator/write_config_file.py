@@ -64,7 +64,7 @@ plugin:
 
 
 configuration:
-  folder_name: simple_widget
+  folder_name: simple-widget
   unique_function_prefix: wpsw_
   unique_constant_prefix: WPSW_
 
@@ -75,8 +75,11 @@ widgets:
    unique_class_name: SimpleWidget
    unique_prefix: sww_
    description: A widget that allows simple actions.
-   # Attributes - title is assumed
    attributes:
+     - label: Title
+       name: title
+       type: text
+
      - label: Simple Image
        name: image
        type: image

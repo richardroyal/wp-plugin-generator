@@ -60,7 +60,7 @@ class {1} extends WP_Widget{{
     if( !empty($title) ) {{
       echo $before_title . $title . $after_title;
     }}
-    echo {1}_view( $this );
+    echo {1}_view( $this, $instance );
     echo $after_widget;
   }}
 
@@ -141,7 +141,7 @@ def write_widget_view(config, w):
 /**
  *  View for {0} Widget.
  */
-function {1}_view($widget){{
+function {1}_view($widget, $instance){{
   return "WIDGET VIEW {1}";
 }}
 
