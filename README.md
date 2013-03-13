@@ -38,3 +38,4 @@ Then run the generator on the config file. This will output a plugin template wi
 wp-plugin-generator config.yml
 ```
 
+Then just add `wp-plugin-generator` in `bin/` to your PATH.
