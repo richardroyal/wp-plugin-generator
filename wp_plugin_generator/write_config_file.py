@@ -28,9 +28,6 @@ def write_config_yaml():
 
 
 
-
-
-
 def scaffold_config():
   s = """
 # config.yaml
