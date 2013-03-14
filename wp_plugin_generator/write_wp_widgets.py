@@ -35,7 +35,7 @@ class {1} extends WP_Widget{{
 
   public function __construct() {{
     parent::__construct(
-              'ermm_widget', '{0}',
+               {1}, '{0}',
                array( 'description' => "{2}" )
     );
 
