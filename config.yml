@@ -33,7 +33,7 @@ plugin:
 
 
 configuration:
-  folder_name: simple_widget
+  folder_name: simple-widget
   unique_function_prefix: wpsw_
   unique_constant_prefix: WPSW_
 
@@ -51,7 +51,7 @@ widgets:
 
      - label: Simple Image
        name: image
-       type: image
+       type: file
 
      - label: Displayed Content
        name: content

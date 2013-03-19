@@ -73,6 +73,7 @@ def create_skeleton( config ):
     f = open( cf['folder_name'] + '/lib/db_setup.php', 'w')
     f = open( cf['folder_name'] + '/assets/css/' + cf['folder_name'] + '.css', 'w')
     f = open( cf['folder_name'] + '/assets/js/' + cf['folder_name'] + '.js', 'w')
+    f = open( cf['folder_name'] + '/assets/js/' + cf['folder_name'] + '-admin.js', 'w')
     f = open( cf['folder_name'] + '/admin/index.html', 'w')
     f = open( cf['folder_name'] + '/views/index.html', 'w')
     f = open( cf['folder_name'] + '/views/partials/index.html', 'w')

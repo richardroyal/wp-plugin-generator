@@ -170,7 +170,6 @@ def write_admin_widget_form( config, w ):
  */
 function {1}_admin_form( $instance, $widget ){{
 
-
   $s = '';
   foreach( $widget->attributes as $attr ){{
     $s .= {1}_admin_attr_field( $instance, $widget, $attr );
@@ -199,12 +198,18 @@ function {1}_admin_attr_field( $instance, $widget, $attr ){{
     $s .= '<textarea class="widefat" id="'.$widget->get_field_id( $attr['name'] ).'" name="'.$widget->get_field_name( $attr['name'] ).'" rows="16" cols="20">';
     $s .=   $value;
     $s .= '</textarea>';
+  }} elseif( $attr['type'] == "file" ) {{
+
+    $s  = '<p>';
+    $s .=   '<input class="upload" type="text" id="'.$widget->get_field_id( $attr['name'] ).'" name="'.$widget->get_field_name( $attr['name'] ).'" value="'.$value.'" />';
+    $s .=   '<input class="upload-button" type="button" name="wsl-image-add" value="Upload Image" />';
+    $s .= '</p>';
 
   }} else {{
 
     $s  = '<p>';
-    $s .= '<label for="'.$widget->get_field_id( $attr['name'] ).'">'.$label.'</label>';
-    $s .= '<input class="widefat" id="'.$widget->get_field_id( $attr['name'] ).'" name="'.$widget->get_field_name( $attr['name'] ).'" type="'.$attr['type'].'" value="'.$value.'" />';
+    $s .=   '<label for="'.$widget->get_field_id( $attr['name'] ).'">'.$label.'</label>';
+    $s .=   '<input class="widefat" id="'.$widget->get_field_id( $attr['name'] ).'" name="'.$widget->get_field_name( $attr['name'] ).'" type="'.$attr['type'].'" value="'.$value.'" />';
     $s .= '</p>';
 
   }}

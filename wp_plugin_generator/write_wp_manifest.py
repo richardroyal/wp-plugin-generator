@@ -107,7 +107,12 @@ def js_include(config):
   s += "    wp_enqueue_script('" + fn + "-js', " + ucp + "URL.'assets/js/" + fn + ".js');\n"
   s += "  }\n"
   s += "}add_action('wp_enqueue_scripts', '" + ufp + "js');\n\n\n"
-  
-  return s
 
+  s += "/**\n *  Register and enqueue admin JavaScript\n */\n"
+  s += "function " + ufp + "admin_js() {\n"
+  s += "  wp_enqueue_script('jquery');\n"
+  s += "  wp_enqueue_script('" + fn + "-admin-js', " + ucp + "URL.'assets/js/" + fn + "-admin.js');\n"
+  s += "}add_action('admin_enqueue_scripts', '" + ufp + "admin_js');\n\n\n"
+
+  return s
 
