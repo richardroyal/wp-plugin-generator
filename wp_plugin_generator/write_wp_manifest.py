@@ -113,6 +113,7 @@ def js_include(config):
   s += "/**\n *  Register and enqueue admin JavaScript\n */\n"
   s += "function " + ufp + "admin_js() {\n"
   s += "  wp_enqueue_script('jquery');\n"
+  s += "  wp_enqueue_style('thickbox');\n"
   s += "  wp_enqueue_script('" + fn + "-admin-js', " + ucp + "URL.'assets/js/" + fn + "-admin.js');\n"
 
   for w in config['widgets']:

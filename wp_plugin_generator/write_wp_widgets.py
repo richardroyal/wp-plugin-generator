@@ -13,6 +13,7 @@ def create_widgets( config ):
     f.write( write_widget( config, w ) )
     write_widget_view( config, w )
     write_admin_widget_form( config, w )
+    write_widget_js( config, w )
 
     f.close()
 
@@ -22,8 +23,6 @@ def write_widget(config, w):
   """
   Write a single widget using stardard template
   """
-
-
 
   s = """\
 <?php
@@ -201,8 +200,8 @@ function {1}_admin_attr_field( $instance, $widget, $attr ){{
   }} elseif( $attr['type'] == "file" ) {{
 
     $s  = '<p>';
-    $s .=   '<input class="upload" type="text" id="'.$widget->get_field_id( $attr['name'] ).'" name="'.$widget->get_field_name( $attr['name'] ).'" value="'.$value.'" />';
-    $s .=   '<input class="upload-button" type="button" name="wsl-image-add" value="Upload Image" />';
+    $s .=   '<input class="upload {1}-file" type="text" id="'.$widget->get_field_id( $attr['name'] ).'" name="'.$widget->get_field_name( $attr['name'] ).'" value="'.$value.'" />';
+    $s .=   '<input class="upload-button {1}-file-btn" type="button" name="wsl-image-add" value="Upload Image" />';
     $s .= '</p>';
 
   }} else {{
@@ -236,4 +235,48 @@ def attribute_string(w):
 
   return s
 
+
+
+
+
+def write_widget_js( config, w ):
+  """
+  Write frontend and admin scaffold JS
+  """
+  fn = config['configuration']['folder_name'] + "/assets/js/" + w['unique_class_name'] + ".js"
+  f = open(fn, "w")
+  
+  s = """\
+jQuery(document).ready(function() {{
+
+}});
+\n""".format(w['name'], w['unique_class_name'], w['description'], w['unique_prefix'])
+
+  f.write(s)
+  f.close()
+
+
+  fn = config['configuration']['folder_name'] + "/assets/js/" + w['unique_class_name'] + "-admin.js"
+  f = open(fn, "w")
+  
+  s = """\
+jQuery(document).ready(function() {{
+
+  jQuery('.{1}-file-btn').click(function() {{
+    formfield = jQuery('#image').attr('name');
+    tb_show('', 'media-upload.php?type=image&amp;TB_iframe=true');
+    return false;
+  }});
+
+  window.send_to_editor = function(html) {{
+    imgurl = jQuery('img',html).attr('src');
+    jQuery('.{1}-file').val(imgurl);
+    tb_remove();
+  }}
+
+}});
+\n""".format(w['name'], w['unique_class_name'], w['description'], w['unique_prefix'])
+
+  f.write(s)
+  f.close()
 
