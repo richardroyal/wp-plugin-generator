@@ -82,7 +82,7 @@ widgets:
 
      - label: Simple Image
        name: image
-       type: image
+       type: file
 
      - label: Displayed Content
        name: content
