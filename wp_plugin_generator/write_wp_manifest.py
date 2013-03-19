@@ -105,6 +105,8 @@ def js_include(config):
   s += "  if(!is_admin()){\n"
   s += "    wp_enqueue_script('jquery');\n"
   s += "    wp_enqueue_script('" + fn + "-js', " + ucp + "URL.'assets/js/" + fn + ".js');\n"
+  for w in config['widgets']:
+    s += "    wp_enqueue_script('" + w['unique_class_name'] + "-js', " + ucp + "URL.'assets/js/" + w['unique_class_name'] + ".js');\n"
   s += "  }\n"
   s += "}add_action('wp_enqueue_scripts', '" + ufp + "js');\n\n\n"
 
@@ -112,7 +114,14 @@ def js_include(config):
   s += "function " + ufp + "admin_js() {\n"
   s += "  wp_enqueue_script('jquery');\n"
   s += "  wp_enqueue_script('" + fn + "-admin-js', " + ucp + "URL.'assets/js/" + fn + "-admin.js');\n"
+
+  for w in config['widgets']:
+    s += "  wp_enqueue_script('" + w['unique_class_name'] + "-admin-js', " + ucp + "URL.'assets/js/" + w['unique_class_name'] + "-admin.js');\n"
+
   s += "}add_action('admin_enqueue_scripts', '" + ufp + "admin_js');\n\n\n"
+
+
+
 
   return s
 
