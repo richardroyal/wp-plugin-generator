@@ -7,15 +7,16 @@ import os
 
 def create_widgets( config ):
 
-  for w in config['widgets']:
-    fn = config['configuration']['folder_name'] + "/lib/class." + w['unique_class_name'] + ".php"
-    f = open(fn, "w")
-    f.write( write_widget( config, w ) )
-    write_widget_view( config, w )
-    write_admin_widget_form( config, w )
-    write_widget_js( config, w )
-
-    f.close()
+  if "widgets" in config:
+    for w in config['widgets']:
+      fn = config['configuration']['folder_name'] + "/lib/class." + w['unique_class_name'] + ".php"
+      f = open(fn, "w")
+      f.write( write_widget( config, w ) )
+      write_widget_view( config, w )
+      write_admin_widget_form( config, w )
+      write_widget_js( config, w )
+  
+      f.close()
 
 
 

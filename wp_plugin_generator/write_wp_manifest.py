@@ -58,7 +58,8 @@ def add_plugin_manifest_template(f, config):
   f.write('require_once("lib/db_setup.php");\n')
   f.write('require_once("lib/functions.php");\n')
   f.write('require_once("admin/functions.php");\n')
-  include_widgets(f, config['widgets'])
+  if "widgets" in config:
+    include_widgets(f, config['widgets'])
   f.write("\n\n\n\n")
   f.write( css_include(config) )
   f.write( js_include(config) )
@@ -105,8 +106,9 @@ def js_include(config):
   s += "  if(!is_admin()){\n"
   s += "    wp_enqueue_script('jquery');\n"
   s += "    wp_enqueue_script('" + fn + "-js', " + ucp + "URL.'assets/js/" + fn + ".js');\n"
-  for w in config['widgets']:
-    s += "    wp_enqueue_script('" + w['unique_class_name'] + "-js', " + ucp + "URL.'assets/js/" + w['unique_class_name'] + ".js');\n"
+  if "widgets" in config:
+    for w in config['widgets']:
+      s += "    wp_enqueue_script('" + w['unique_class_name'] + "-js', " + ucp + "URL.'assets/js/" + w['unique_class_name'] + ".js');\n"
   s += "  }\n"
   s += "}add_action('wp_enqueue_scripts', '" + ufp + "js');\n\n\n"
 
@@ -119,8 +121,9 @@ def js_include(config):
   s += "  wp_enqueue_script('thickbox');\n"
   s += "  wp_enqueue_script('" + fn + "-admin-js', " + ucp + "URL.'assets/js/" + fn + "-admin.js');\n"
 
-  for w in config['widgets']:
-    s += "  wp_enqueue_script('" + w['unique_class_name'] + "-admin-js', " + ucp + "URL.'assets/js/" + w['unique_class_name'] + "-admin.js');\n"
+  if "widgets" in config:
+    for w in config['widgets']:
+      s += "  wp_enqueue_script('" + w['unique_class_name'] + "-admin-js', " + ucp + "URL.'assets/js/" + w['unique_class_name'] + "-admin.js');\n"
 
   s += "}add_action('admin_enqueue_scripts', '" + ufp + "admin_js');\n\n\n"
 

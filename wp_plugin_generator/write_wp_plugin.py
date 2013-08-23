@@ -83,9 +83,10 @@ def create_skeleton( config ):
     f = open( cf['folder_name'] + '/assets/js/index.html', 'w')
     f = open( cf['folder_name'] + '/assets/images/index.html', 'w')
 
-    for w in config['widgets']:
-      f = open( cf['folder_name'] + '/assets/js/' + w['unique_class_name'] + '.js', 'w')
-      f = open( cf['folder_name'] + '/assets/js/' + w['unique_class_name'] + '-admin.js', 'w')
+    if "widgets" in config:
+      for w in config['widgets']:
+        f = open( cf['folder_name'] + '/assets/js/' + w['unique_class_name'] + '.js', 'w')
+        f = open( cf['folder_name'] + '/assets/js/' + w['unique_class_name'] + '-admin.js', 'w')
 
 
   else:
