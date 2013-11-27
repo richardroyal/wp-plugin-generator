@@ -40,6 +40,8 @@ wp-plugin-generator config.yml
 
 ## Installation 
 
+Requires `python-yaml`.
+
 ```bash
 git clone https://github.com/richardroyal/wp-plugin-generator.git
 cd wp-plugin-generator
