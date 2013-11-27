@@ -41,7 +41,7 @@ wp-plugin-generator config.yml
 ## Installation 
 
 ```bash
-git clone git@github.com:richardroyal/wp-plugin-generator.git
+git clone https://github.com/richardroyal/wp-plugin-generator.git
 cd wp-plugin-generator
 
 sudo python setup.py install
